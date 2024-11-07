@@ -17,5 +17,5 @@ public class Appointment {
     private String userId;
     private LocalDateTime appointmentDate;
     private String status;
-    private String labId; // Store Lab ID as a string reference to link with Lab documents
+    private String labId;
 }

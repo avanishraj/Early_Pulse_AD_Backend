@@ -95,4 +95,5 @@ public class LabServiceImpl implements LabService {
                 .then()
                 .onErrorMap(e -> new RuntimeException("Failed to delete lab with id: " + id, e));
     }
+
 }

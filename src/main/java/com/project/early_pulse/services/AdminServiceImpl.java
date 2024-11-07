@@ -7,7 +7,6 @@ import com.project.early_pulse.entity.Admin;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
-
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
@@ -22,7 +21,6 @@ public class AdminServiceImpl implements AdminService {
         this.firestore = FirestoreClient.getFirestore();
     }
 
-    // Utility method to convert ApiFuture to CompletableFuture
     private <T> CompletableFuture<T> toCompletableFuture(ApiFuture<T> apiFuture) {
         CompletableFuture<T> completableFuture = new CompletableFuture<>();
         apiFuture.addListener(() -> {
