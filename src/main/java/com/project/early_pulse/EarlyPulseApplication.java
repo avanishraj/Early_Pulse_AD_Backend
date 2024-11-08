@@ -4,7 +4,6 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Profile;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,4 +28,5 @@ public class EarlyPulseApplication {
 
 		SpringApplication.run(EarlyPulseApplication.class, args);
 	}
+
 }

@@ -23,7 +23,7 @@ public class AdminController {
      * Create a new admin.
      */
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public Mono<Admin> createAdmin(@RequestBody Admin admin) {
         return adminService.createAdmin(admin);
     }

@@ -24,7 +24,7 @@ public class ReportController {
      * Admin uploads a report PDF for a specific user and appointment.
      */
     @PostMapping("/upload")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public Mono<Report> uploadReport(
             @RequestParam(required = false)  String userId,
             @RequestParam(required = false)  String appointmentId,
