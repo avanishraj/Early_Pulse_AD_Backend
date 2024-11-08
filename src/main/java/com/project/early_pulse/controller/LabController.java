@@ -12,6 +12,10 @@ import reactor.core.publisher.Mono;
 public class LabController {
 
     private final LabService labService;
+    @GetMapping("/test")
+    public String test(String testMessage){
+        return "Hi, Welcome to Early Pulse platform";
+    }
 
     @Autowired
     public LabController(LabService labService) {
@@ -19,7 +23,7 @@ public class LabController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     public Mono<Lab> createLab(@RequestBody Lab lab) {
         return labService.createLab(lab);
     }

@@ -23,7 +23,7 @@ public class AppointmentController {
      * Create a new appointment.
      */
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     public Mono<Appointment> createAppointment(@RequestBody Appointment appointment) {
         return appointmentService.createAppointment(appointment);
     }
