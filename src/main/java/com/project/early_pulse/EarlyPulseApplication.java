@@ -16,8 +16,8 @@ public class EarlyPulseApplication {
 
 	public static void main(String[] args) throws IOException {
 		ClassLoader classLoader = EarlyPulseApplication.class.getClassLoader();
-		File file = new File(Objects.requireNonNull(classLoader.getResource("early_pulse_firebase_key.json")).getFile());
-		FileInputStream serviceAccount = new FileInputStream("D:/Early Pulse/Early_Pulse_AD_Backend/early_pulse/src/main/resources/early_pulse_firebase_key.json");
+		File file = new File(Objects.requireNonNull(classLoader.getResource("firebase_service_key.json")).getFile());
+		FileInputStream serviceAccount = new FileInputStream("D:/Early Pulse/Early_Pulse_AD_Backend/early_pulse/src/main/resources/firebase_service_key.json");
 
 
 		FirebaseOptions options = new FirebaseOptions.Builder()
