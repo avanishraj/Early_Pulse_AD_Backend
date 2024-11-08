@@ -11,11 +11,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Report {
-
-    @DocumentId
     private String id;
     private String userId;
-    private String reportUrl;
+    private String appointmentId;
+    private String reportUrl;  // URL of the PDF in Firebase Storage
     private LocalDateTime uploadedDate;
-    private String appointmentId; // Store Appointment ID as a string reference
 }
