@@ -22,7 +22,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         this.firestore = FirestoreClient.getFirestore();
     }
 
-    // Utility method to convert ApiFuture to CompletableFuture
     private <T> CompletableFuture<T> toCompletableFuture(ApiFuture<T> apiFuture) {
         CompletableFuture<T> completableFuture = new CompletableFuture<>();
         apiFuture.addListener(() -> {

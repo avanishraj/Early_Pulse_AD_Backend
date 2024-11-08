@@ -46,17 +46,12 @@ public class ReportServiceImpl implements ReportService {
         String storagePath = "reports/" + reportId + ".pdf";
 
         try {
-            // Upload PDF to Firebase Storage
             InputStream fileInputStream = file.getInputStream();
             StorageClient.getInstance().bucket().create(storagePath, fileInputStream, file.getContentType());
 
-            // Generate URL for the PDF
             String reportUrl = StorageClient.getInstance().bucket().get(storagePath).getMediaLink();
-
-            // Create Report metadata
             Report report = new Report(reportId, userId, appointmentId, reportUrl, LocalDateTime.now());
 
-            // Save metadata in Firestore
             DocumentReference docRef = firestore.collection(COLLECTION_NAME).document(reportId);
             return Mono.fromFuture(toCompletableFuture(docRef.set(report)))
                     .then(Mono.just(report))
@@ -91,7 +86,6 @@ public class ReportServiceImpl implements ReportService {
                 });
     }
 
-    // This method simulates sending a notification (implementation can vary)
     private void sendReportNotificationToUser(String userId, String message, String reportUrl) {
         // Send notification using Firebase Cloud Messaging or another notification service
         System.out.println("Notification sent to user " + userId + ": " + message + ". View at: " + reportUrl);

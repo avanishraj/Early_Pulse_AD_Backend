@@ -18,10 +18,6 @@ public class AppointmentController {
     public AppointmentController(AppointmentService appointmentService) {
         this.appointmentService = appointmentService;
     }
-
-    /**
-     * Create a new appointment.
-     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<Appointment> createAppointment(@RequestBody Appointment appointment) {

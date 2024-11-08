@@ -14,6 +14,6 @@ public class Report {
     private String id;
     private String userId;
     private String appointmentId;
-    private String reportUrl;  // URL of the PDF in Firebase Storage
+    private String reportUrl;
     private LocalDateTime uploadedDate;
 }

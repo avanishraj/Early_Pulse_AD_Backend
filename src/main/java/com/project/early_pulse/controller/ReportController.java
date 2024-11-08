@@ -20,9 +20,6 @@ public class ReportController {
         this.reportService = reportService;
     }
 
-    /**
-     * Admin uploads a report PDF for a specific user and appointment.
-     */
     @PostMapping("/upload")
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<Report> uploadReport(
@@ -32,17 +29,11 @@ public class ReportController {
         return reportService.uploadReport(userId, appointmentId, file);
     }
 
-    /**
-     * Retrieve all reports for a specific user by userId.
-     */
     @GetMapping("/user/{userId}")
     public Flux<Report> getReportsByUserId(@PathVariable String userId) {
         return reportService.getReportsByUserId(userId);
     }
 
-    /**
-     * Retrieve a report for a specific appointment by appointmentId.
-     */
     @GetMapping("/appointment/{appointmentId}")
     public Mono<Report> getReportByAppointmentId(@PathVariable String appointmentId) {
         return reportService.getReportByAppointmentId(appointmentId);

@@ -30,9 +30,6 @@ public class LabController {
                 .switchIfEmpty(Mono.error(new RuntimeException("Lab not found with ID: " + id)));
     }
 
-    /**
-     * Get all labs.
-     */
     @GetMapping
     public Flux<Lab> getAllLabs() {
         return labService.getAllLabs();
@@ -44,9 +41,6 @@ public class LabController {
                 .switchIfEmpty(Mono.error(new RuntimeException("Lab not found with ID: " + id)));
     }
 
-    /**
-     * Delete a lab by ID.
-     */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Mono<Void> deleteLab(@PathVariable String id) {
