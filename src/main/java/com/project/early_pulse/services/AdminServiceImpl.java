@@ -94,4 +94,5 @@ public class AdminServiceImpl implements AdminService {
                 .then()
                 .onErrorMap(e -> new RuntimeException("Failed to delete admin with id: " + id, e));
     }
+
 }

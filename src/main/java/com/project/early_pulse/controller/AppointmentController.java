@@ -18,24 +18,18 @@ public class AppointmentController {
     public AppointmentController(AppointmentService appointmentService) {
         this.appointmentService = appointmentService;
     }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<Appointment> createAppointment(@RequestBody Appointment appointment) {
         return appointmentService.createAppointment(appointment);
     }
 
-    /**
-     * Get an appointment by its ID.
-     */
     @GetMapping("/{id}")
     public Mono<Appointment> getAppointmentById(@PathVariable String id) {
-        return appointmentService.getAppointmentById(id)
-                .switchIfEmpty(Mono.error(new RuntimeException("Appointment not found with ID: " + id)));
+        return appointmentService.getAppointmentById(id);
     }
 
-    /**
-     * Get all appointments.
-     */
     @GetMapping
     public Flux<Appointment> getAllAppointments() {
         return appointmentService.getAllAppointments();
@@ -51,22 +45,16 @@ public class AppointmentController {
         return appointmentService.getAppointmentsByUserId(userId);
     }
 
-    /**
-     * Update an existing appointment by ID.
-     */
     @PutMapping("/{id}")
     public Mono<Appointment> updateAppointment(@PathVariable String id, @RequestBody Appointment appointment) {
-        return appointmentService.updateAppointment(id, appointment)
-                .switchIfEmpty(Mono.error(new RuntimeException("Appointment not found with ID: " + id)));
+        return appointmentService.updateAppointment(id, appointment);
     }
 
-    /**
-     * Delete an appointment by ID.
-     */
+
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Mono<Void> deleteAppointment(@PathVariable String id) {
-        return appointmentService.deleteAppointment(id)
-                .switchIfEmpty(Mono.error(new RuntimeException("Appointment not found with ID: " + id)));
+        return appointmentService.deleteAppointment(id);
     }
 }

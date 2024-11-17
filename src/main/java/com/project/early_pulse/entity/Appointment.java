@@ -1,11 +1,9 @@
 package com.project.early_pulse.entity;
 
-import com.google.cloud.firestore.annotation.DocumentId;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-
-import java.time.LocalDateTime;
+import com.google.cloud.firestore.annotation.DocumentId;
 
 @Data
 @NoArgsConstructor
@@ -15,7 +13,8 @@ public class Appointment {
     @DocumentId
     private String id;
     private String userId;
-    private LocalDateTime appointmentDate;
+    private String userName;
+    private String appointmentDate;
     private String status;
     private String labId;
 }

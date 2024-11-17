@@ -15,9 +15,11 @@ import java.util.Objects;
 public class EarlyPulseApplication {
 
 	public static void main(String[] args) throws IOException {
+		String firebaseServiceKeyPathEc2 = "/home/ec2-user/firebase_service_key.json";
+		String firebaseServiceKeyPathLocal = "D:/Early Pulse/Early_Pulse_AD_Backend/early_pulse/src/main/resources/firebase_service_key.json";
 		ClassLoader classLoader = EarlyPulseApplication.class.getClassLoader();
 		File file = new File(Objects.requireNonNull(classLoader.getResource("firebase_service_key.json")).getFile());
-		FileInputStream serviceAccount = new FileInputStream("D:/Early Pulse/Early_Pulse_AD_Backend/early_pulse/src/main/resources/firebase_service_key.json");
+		FileInputStream serviceAccount = new FileInputStream(firebaseServiceKeyPathEc2);
 
 
 		FirebaseOptions options = new FirebaseOptions.Builder()

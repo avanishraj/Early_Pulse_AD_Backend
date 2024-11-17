@@ -15,5 +15,5 @@ public class Admin {
     private String name;
     private String email;
     private String password;
-    private String labId; // Store Lab ID as a string reference to link with Lab documents
+    private String labId;
 }

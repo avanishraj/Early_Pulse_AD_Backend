@@ -9,6 +9,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
@@ -37,7 +38,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public Mono<Appointment> createAppointment(Appointment appointment) {
         CollectionReference appointmentsCollection = firestore.collection(COLLECTION_NAME);
-        DocumentReference newDocRef = appointmentsCollection.document(); // Generate a new document ID
+        DocumentReference newDocRef = appointmentsCollection.document();
         appointment.setId(newDocRef.getId());
 
         return Mono.fromFuture(toCompletableFuture(newDocRef.set(appointment)))
@@ -83,40 +84,32 @@ public class AppointmentServiceImpl implements AppointmentService {
     public Flux<Appointment> getAppointmentsByLabId(String labId) {
         CollectionReference appointmentsCollection = firestore.collection(COLLECTION_NAME);
         return Mono.fromFuture(toCompletableFuture(appointmentsCollection.whereEqualTo("labId", labId).get()))
-                .flatMapMany(querySnapshot -> {
-                    List<Appointment> appointments = querySnapshot.getDocuments().stream()
-                            .map(doc -> {
-                                Appointment appointment = doc.toObject(Appointment.class);
-                                appointment.setId(doc.getId());
-                                return appointment;
-                            })
-                            .collect(Collectors.toList());
-                    return Flux.fromIterable(appointments);
-                })
-                .onErrorMap(e -> new RuntimeException("Failed to get appointments for labId: " + labId, e));
+                .flatMapMany(querySnapshot -> Flux.fromIterable(querySnapshot.getDocuments())
+                        .map(doc -> {
+                            Appointment appointment = doc.toObject(Appointment.class);
+                            appointment.setId(doc.getId());
+                            return appointment;
+                        }))
+                .onErrorMap(e -> new RuntimeException("Failed to get appointments by labId", e));
     }
 
     @Override
     public Flux<Appointment> getAppointmentsByUserId(String userId) {
         CollectionReference appointmentsCollection = firestore.collection(COLLECTION_NAME);
         return Mono.fromFuture(toCompletableFuture(appointmentsCollection.whereEqualTo("userId", userId).get()))
-                .flatMapMany(querySnapshot -> {
-                    List<Appointment> appointments = querySnapshot.getDocuments().stream()
-                            .map(doc -> {
-                                Appointment appointment = doc.toObject(Appointment.class);
-                                appointment.setId(doc.getId());
-                                return appointment;
-                            })
-                            .collect(Collectors.toList());
-                    return Flux.fromIterable(appointments);
-                })
-                .onErrorMap(e -> new RuntimeException("Failed to get appointments for userId: " + userId, e));
+                .flatMapMany(querySnapshot -> Flux.fromIterable(querySnapshot.getDocuments())
+                        .map(doc -> {
+                            Appointment appointment = doc.toObject(Appointment.class);
+                            appointment.setId(doc.getId());
+                            return appointment;
+                        }))
+                .onErrorMap(e -> new RuntimeException("Failed to get appointments by userId", e));
     }
 
     @Override
     public Mono<Appointment> updateAppointment(String id, Appointment appointment) {
         DocumentReference docRef = firestore.collection(COLLECTION_NAME).document(id);
-        appointment.setId(id); // Ensure appointment object has correct ID
+        appointment.setId(id);
         return Mono.fromFuture(toCompletableFuture(docRef.set(appointment)))
                 .thenReturn(appointment)
                 .onErrorMap(e -> new RuntimeException("Failed to update appointment with id: " + id, e));
