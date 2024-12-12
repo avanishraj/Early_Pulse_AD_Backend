@@ -1,5 +1,4 @@
 package com.project.early_pulse.controller;
-
 import com.project.early_pulse.entity.Appointment;
 import com.project.early_pulse.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
