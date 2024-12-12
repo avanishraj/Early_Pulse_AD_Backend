@@ -82,6 +82,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>early_pulse</finalName>
 	</build>
 
 </project>
